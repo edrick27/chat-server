@@ -1,0 +1,70 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <ul id="messages"></ul>
+    <form action="">
+        <a href="javascript:;" id="change_room">Change</a>
+        <input id="m" autocomplete="off"/>
+        <button>Send</button>
+    </form>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+        $(function() {
+//            var socket = io({transports: ['websocket'], upgrade: false, port: 3001}).connect();
+
+            let access_token = '885d262cc5fb3321a46b62b0af8e4a8a';
+            var socket     = io.connect('http://localhost:3000', {
+                transports: ['websocket'],
+                upgrade   : false,
+                query     : 'token=' + access_token
+            });
+            // var room       = 'd9414f4e-5ff2-4745-8662-575de74e6311';
+            var room       = 'd5893111-f3c9-4bd5-ac05-3793066cbfbb';
+            var user       = {
+                userId: '1d534fe4-87bc-42fe-8718-b6dd0e602a49',
+                organization_id: 1
+            };
+            window._socket = socket;
+
+            socket.on('connect', function() {
+                console.log('connected');
+                socket.emit('room', {roomId: room, userId: user.userId});
+            });
+
+            socket.on('disconnect', function(reason) {
+                console.log('disconnect', reason);
+                // socket.emit('room', {room: room, user: user.email});
+            });
+
+            $('form').submit(function() {
+
+                var message = {
+                    user: user,
+                    text: $('#m').val(),
+                    roomId: room
+                };
+
+                socket.emit('on chat message', message);
+
+
+                $('#m').val('');
+                return false;
+            });
+            socket.on('on chat message', function(msg) {
+                console.log(msg);
+                $('#messages').append($('<li>').text(msg.text));
+                window.scrollTo(0, document.body.scrollHeight);
+            });
+
+            $('#change_room').on('click', function() {
+                room = '7afbf1f3-a5c6-4461-9019-56eef67c2638';
+                socket.emit('room', {room: room, userId: user.userId});
+            });
+
+            var worker = new Worker('javascripts/ChatWorker.js');
+
+            worker.addEventListener('message', function(data) {console.log(data.data)}, false);
+        });
+    </script>
+{% endblock %}

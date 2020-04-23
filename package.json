@@ -1,0 +1,26 @@
+{
+  "name": "dingdonechatserver",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "1.18.2",
+    "cookie-parser": "1.4.3",
+    "debug": "2.6.9",
+    "express": "4.15.5",
+    "express-validator": "4.3.0",
+    "md5": "^2.2.1",
+    "morgan": "1.9.0",
+    "serve-favicon": "2.4.5",
+    "slugify": "1.2.9",
+    "socket.io": "2.0.4",
+    "thinky": "2.3.9",
+    "twig": "0.10.3",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "1.14.11"
+  }
+}
