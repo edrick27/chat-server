@@ -192,6 +192,16 @@ module.exports = (r, models) => {
             if (rooms.length == 0) return null;
 
             return rooms[0];
+        },
+
+        getRooms: async (organization_id) => {
+            let rooms = await Room
+                .filter({
+                    organization_id: organization_id
+                })
+                .run();
+
+            return rooms;
         }
         //
         // getMyPost: async function(params) {

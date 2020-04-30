@@ -13,7 +13,7 @@ module.exports = models => {
     });
 
 
-    router.get('/chat', async function (req, res, next) {
+    router.get('/C', async function (req, res, next) {
         res.render('chat');
     });
 

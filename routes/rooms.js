@@ -67,6 +67,17 @@ module.exports = models => {
         res.send(await models.Message.fetchLatestMessages(timestamp, organization_id));
     });
 
+    router.get('/chatroomsgetall/:organization_id*?', async function(req, res, next) {
+
+        const invalid = handleRequestValidations(req, res);
+        if (invalid) return invalid;
+
+        let organization_id = req.params.organization_id;
+        let rooms = await models.Room.getRooms(organization_id);
+
+        res.send(rooms);
+    });
+
     function handleRequestValidations(req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
