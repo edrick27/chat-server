@@ -61,6 +61,14 @@ module.exports = (r, models) => {
                                               }).run();
 
             return users.length > 0 ? users[0] : null;
+        },
+
+        getChatUsers: async (organization_id) => {
+            let users = await ChatUser.filter({
+                                            organization_id: organization_id
+                                        }).run();
+
+            return users;
         }
 
         //

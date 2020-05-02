@@ -10,7 +10,7 @@ const rethinkdbConfig = require('./config/rethinkdb');
 const models = require('./models/schema')(rethinkdbConfig);
 
 var index          = require('./routes/index')(models);
-var users          = require('./routes/users');
+var users          = require('./routes/users')(models);
 const rooms        = require('./routes/rooms')(models);
 const organization = require('./routes/organization')(models);
 const http         = require("http");
