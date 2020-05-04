@@ -20,6 +20,7 @@ module.exports = config => {
     const Room = thinky.createModel('Room', {
         id             : type.string(),
         name           : type.string().required(),
+        url_picture    : type.string(),
         slug           : type.string().required(),
         organization_id: type.string().required(),
         type           : type.string().required(),
@@ -32,6 +33,7 @@ module.exports = config => {
     const ChatUser = thinky.createModel('ChatUser', {
         id             : type.string(),
         name           : type.string(),
+        url_picture    : type.string(),
         nickname       : type.string(),
         email          : type.string().email(),
         dd_user_id     : type.string(),
@@ -44,6 +46,8 @@ module.exports = config => {
     const Message = thinky.createModel('Message', {
         id             : type.string(),
         text           : type.string(),
+        type           : type.string(),
+        file_name      : type.string(),
         room_id        : type.string(),
         from_id        : type.string(),
         from_dd_user_id: type.string(),
