@@ -33,6 +33,7 @@ module.exports = (r, models) => {
                                           organization_id: room.organization_id,
                                           text           : params.text,
                                           message_type   : params.message_type,
+                                          file_name      : params.file_name,
                                           created_at     : r.now(),
                                           updated_at     : r.now()
                                       });
