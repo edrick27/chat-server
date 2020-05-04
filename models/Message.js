@@ -4,6 +4,7 @@ module.exports = (r, models) => {
 
     const {Message}  = models;
     const TYPE_TEXT  = 'MESSAGE_TYPE_TEXT';
+    const TYPE_AUDIO = 'MESSAGE_TYPE_AUDIO';
     const TYPE_MEDIA = 'MESSAGE_TYPE_MEDIA';
 
     return {
@@ -31,7 +32,7 @@ module.exports = (r, models) => {
                                           dd_user_id     : user.dd_user_id,
                                           organization_id: room.organization_id,
                                           text           : params.text,
-                                          message_type   : TYPE_TEXT,
+                                          message_type   : params.message_type,
                                           created_at     : r.now(),
                                           updated_at     : r.now()
                                       });
